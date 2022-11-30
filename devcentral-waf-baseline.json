@@ -1,0 +1,1699 @@
+{
+   "policy" : {
+      "antivirus" : {
+         "inspectHttpUploads" : false
+      },
+      "applicationLanguage" : "utf-8",
+      "behavioral-enforcement" : {
+         "behavioralEnforcementViolations" : [
+            {
+               "name" : "VIOL_CONVICTION"
+            },
+            {
+               "name" : "VIOL_THREAT_ANALYSIS"
+            },
+            {
+               "name" : "VIOL_BLOCKING_CONDITION"
+            },
+            {
+               "name" : "VIOL_THREAT_CAMPAIGN"
+            },
+            {
+               "name" : "VIOL_BLACKLISTED_IP"
+            },
+            {
+               "name" : "VIOL_FILETYPE"
+            },
+            {
+               "name" : "VIOL_URL"
+            },
+            {
+               "name" : "VIOL_GEOLOCATION"
+            }
+         ],
+         "enableBehavioralEnforcement" : false,
+         "enableBlockingCveSignatures" : true,
+         "enableBlockingHighAccuracySignatures" : true,
+         "enableBlockingLikelyMaliciousTransactions" : true,
+         "enableBlockingSuspiciousTransactions" : false,
+         "enableBlockingViolations" : true
+      },
+      "blocking-settings" : {
+         "evasions" : [
+            {
+               "description" : "Bad unescape",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Apache whitespace",
+               "enabled" : true,
+               "learn" : false
+            },
+            {
+               "description" : "Bare byte decoding",
+               "enabled" : true,
+               "learn" : true
+            },
+            {
+               "description" : "IIS Unicode codepoints",
+               "enabled" : true,
+               "learn" : false
+            },
+            {
+               "description" : "IIS backslashes",
+               "enabled" : true,
+               "learn" : false
+            },
+            {
+               "description" : "%u decoding",
+               "enabled" : true,
+               "learn" : false
+            },
+            {
+               "description" : "Multiple decoding",
+               "enabled" : true,
+               "learn" : true,
+               "maxDecodingPasses" : 4
+            },
+            {
+               "description" : "Directory traversals",
+               "enabled" : true,
+               "learn" : true
+            }
+         ],
+         "http-protocols" : [
+            {
+               "description" : "Multiple host headers",
+               "enabled" : true,
+               "learn" : false
+            },
+            {
+               "description" : "Check maximum number of parameters",
+               "enabled" : true,
+               "learn" : false,
+               "maxParams" : 500
+            },
+            {
+               "description" : "Bad host header value",
+               "enabled" : false,
+               "learn" : true
+            },
+            {
+               "description" : "Check maximum number of headers",
+               "enabled" : true,
+               "learn" : false,
+               "maxHeaders" : 50
+            },
+            {
+               "description" : "Unparsable request content",
+               "enabled" : true
+            },
+            {
+               "description" : "High ASCII characters in headers",
+               "enabled" : true,
+               "learn" : false
+            },
+            {
+               "description" : "Null in request",
+               "enabled" : true
+            },
+            {
+               "description" : "Bad HTTP version",
+               "enabled" : true
+            },
+            {
+               "description" : "Content length should be a positive number",
+               "enabled" : false,
+               "learn" : true
+            },
+            {
+               "description" : "Host header contains IP address",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "CRLF characters before request start",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "No Host header in HTTP/1.1 request",
+               "enabled" : false,
+               "learn" : true
+            },
+            {
+               "description" : "Bad multipart parameters parsing",
+               "enabled" : true,
+               "learn" : false
+            },
+            {
+               "description" : "Bad multipart/form-data request parsing",
+               "enabled" : true,
+               "learn" : false
+            },
+            {
+               "description" : "Body in GET or HEAD requests",
+               "enabled" : true,
+               "learn" : false
+            },
+            {
+               "description" : "Chunked request with Content-Length header",
+               "enabled" : true,
+               "learn" : false
+            },
+            {
+               "description" : "Several Content-Length headers",
+               "enabled" : false,
+               "learn" : true
+            },
+            {
+               "description" : "Header name with no header value",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "POST request with Content-Length: 0",
+               "enabled" : false,
+               "learn" : false
+            }
+         ],
+         "violations" : [
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "GraphQL introspection query",
+               "name" : "VIOL_GRAPHQL_INTROSPECTION_QUERY"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "GraphQL data does not comply with format settings",
+               "learn" : true,
+               "name" : "VIOL_GRAPHQL_FORMAT"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Malformed GraphQL data",
+               "learn" : true,
+               "name" : "VIOL_GRAPHQL_MALFORMED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Server-side access to disallowed host",
+               "name" : "VIOL_SERVER_SIDE_HOST"
+            },
+            {
+               "description" : "Attack signature detected",
+               "name" : "VIOL_ATTACK_SIGNATURE"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Disallowed file upload content detected in body",
+               "name" : "VIOL_FILE_UPLOAD_IN_BODY"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "DataSafe Data Integrity",
+               "name" : "VIOL_DATA_INTEGRITY"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Violation Rating Need Examination detected",
+               "name" : "VIOL_RATING_NEED_EXAMINATION"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Violation Rating Threat detected",
+               "name" : "VIOL_RATING_THREAT"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Illegal repeated header",
+               "learn" : false,
+               "name" : "VIOL_HEADER_REPEATED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Mandatory request body is missing",
+               "name" : "VIOL_MANDATORY_REQUEST_BODY"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Bad Actor Convicted",
+               "name" : "VIOL_CONVICTION"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Host name mismatch",
+               "name" : "VIOL_HOSTNAME_MISMATCH"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal host name",
+               "name" : "VIOL_HOSTNAME"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Leaked Credentials Detection",
+               "name" : "VIOL_LEAKED_CREDENTIALS"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Mitigation action determined by Threat Analysis Platform",
+               "name" : "VIOL_THREAT_ANALYSIS"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Blocking Condition Detected",
+               "name" : "VIOL_BLOCKING_CONDITION"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Bad Actor Detected",
+               "name" : "VIOL_MALICIOUS_DEVICE"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal parameter location",
+               "name" : "VIOL_PARAMETER_LOCATION"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Mandatory parameter is missing",
+               "name" : "VIOL_MANDATORY_PARAMETER"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "JSON data does not comply with JSON schema",
+               "name" : "VIOL_JSON_SCHEMA"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal parameter array value",
+               "name" : "VIOL_PARAMETER_ARRAY_VALUE"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Threat Campaign detected",
+               "name" : "VIOL_THREAT_CAMPAIGN"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "IP is blacklisted",
+               "name" : "VIOL_BLACKLISTED_IP"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Plain text data does not comply with format settings",
+               "learn" : false,
+               "name" : "VIOL_PLAINTEXT_FORMAT"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal WebSocket binary message length",
+               "learn" : false,
+               "name" : "VIOL_WEBSOCKET_BINARY_MESSAGE_LENGTH"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal number of frames per message",
+               "learn" : false,
+               "name" : "VIOL_WEBSOCKET_FRAMES_PER_MESSAGE_COUNT"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal WebSocket extension",
+               "learn" : false,
+               "name" : "VIOL_WEBSOCKET_EXTENSION"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Binary content found in text only WebSocket",
+               "learn" : false,
+               "name" : "VIOL_WEBSOCKET_BINARY_MESSAGE_NOT_ALLOWED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Text content found in binary only WebSocket",
+               "learn" : false,
+               "name" : "VIOL_WEBSOCKET_TEXT_MESSAGE_NOT_ALLOWED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal cross-origin request",
+               "learn" : false,
+               "name" : "VIOL_CROSS_ORIGIN_REQUEST"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Null character found in WebSocket text message",
+               "name" : "VIOL_WEBSOCKET_TEXT_NULL_VALUE"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal WebSocket frame length",
+               "learn" : false,
+               "name" : "VIOL_WEBSOCKET_FRAME_LENGTH"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Mask not found in client frame",
+               "learn" : false,
+               "name" : "VIOL_WEBSOCKET_FRAME_MASKING"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Failure in WebSocket framing protocol",
+               "learn" : true,
+               "name" : "VIOL_WEBSOCKET_FRAMING_PROTOCOL"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Bad WebSocket handshake request",
+               "learn" : true,
+               "name" : "VIOL_WEBSOCKET_BAD_REQUEST"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal redirection attempt",
+               "learn" : false,
+               "name" : "VIOL_REDIRECT"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Mandatory HTTP header is missing",
+               "learn" : false,
+               "name" : "VIOL_MANDATORY_HEADER"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "GWT data does not comply with format settings",
+               "learn" : false,
+               "name" : "VIOL_GWT_FORMAT"
+            },
+            {
+               "alarm" : true,
+               "block" : false,
+               "description" : "Illegal Base64 value",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER_VALUE_BASE64"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Access from malicious IP address",
+               "name" : "VIOL_MALICIOUS_IP"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Disallowed file upload content detected",
+               "learn" : false,
+               "name" : "VIOL_FILE_UPLOAD"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Malformed GWT data",
+               "learn" : false,
+               "name" : "VIOL_GWT_MALFORMED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal meta character in header",
+               "learn" : false,
+               "name" : "VIOL_HEADER_METACHAR"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal request content type",
+               "learn" : false,
+               "name" : "VIOL_URL_CONTENT_TYPE"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Illegal HTTP status in response",
+               "learn" : false,
+               "name" : "VIOL_HTTP_RESPONSE_STATUS"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Modified ASM cookie",
+               "learn" : true,
+               "name" : "VIOL_ASM_COOKIE_MODIFIED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Modified domain cookie(s)",
+               "learn" : false,
+               "name" : "VIOL_COOKIE_MODIFIED"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Cookie not RFC-compliant",
+               "learn" : true,
+               "name" : "VIOL_COOKIE_MALFORMED"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Malformed JSON data",
+               "learn" : true,
+               "name" : "VIOL_JSON_MALFORMED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal entry point",
+               "learn" : false,
+               "name" : "VIOL_FLOW_ENTRY_POINT"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Access from disallowed User/Session/IP/Device ID",
+               "name" : "VIOL_SESSION_AWARENESS"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "ASM Cookie Hijacking",
+               "learn" : false,
+               "name" : "VIOL_ASM_COOKIE_HIJACKING"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Expired timestamp",
+               "learn" : false,
+               "name" : "VIOL_COOKIE_EXPIRED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal static parameter value",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER_STATIC_VALUE"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal dynamic parameter value",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER_DYNAMIC_VALUE"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal parameter value length",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER_VALUE_LENGTH"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal parameter data type",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER_DATA_TYPE"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal parameter numeric value",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER_NUMERIC_VALUE"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal number of mandatory parameters",
+               "learn" : false,
+               "name" : "VIOL_FLOW_MANDATORY_PARAMS"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Parameter value does not comply with regular expression",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER_VALUE_REGEXP"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Illegal file type",
+               "learn" : true,
+               "name" : "VIOL_FILETYPE"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal URL",
+               "learn" : false,
+               "name" : "VIOL_URL"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal flow to URL",
+               "learn" : false,
+               "name" : "VIOL_FLOW"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Illegal method",
+               "learn" : false,
+               "name" : "VIOL_METHOD"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal session ID in URL",
+               "learn" : false,
+               "name" : "VIOL_DYNAMIC_SESSION"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal query string or POST data",
+               "learn" : false,
+               "name" : "VIOL_FLOW_DISALLOWED_INPUT"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal parameter",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal empty parameter value",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER_EMPTY_VALUE"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal POST data length",
+               "learn" : false,
+               "name" : "VIOL_POST_DATA_LENGTH"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Null in multi-part parameter value",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER_MULTIPART_NULL_VALUE"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal header length",
+               "learn" : false,
+               "name" : "VIOL_HEADER_LENGTH"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "JSON data does not comply with format settings",
+               "learn" : false,
+               "name" : "VIOL_JSON_FORMAT"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal repeated parameter name",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER_REPEATED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal meta character in URL",
+               "learn" : false,
+               "name" : "VIOL_URL_METACHAR"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal meta character in parameter name",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER_NAME_METACHAR"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal meta character in value",
+               "learn" : false,
+               "name" : "VIOL_PARAMETER_VALUE_METACHAR"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "SOAP method not allowed",
+               "learn" : false,
+               "name" : "VIOL_XML_SOAP_METHOD"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Brute Force: Maximum login attempts are exceeded",
+               "name" : "VIOL_BRUTE_FORCE"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "CSRF authentication expired",
+               "learn" : false,
+               "name" : "VIOL_CSRF_EXPIRED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal URL length",
+               "learn" : false,
+               "name" : "VIOL_URL_LENGTH"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal cookie length",
+               "learn" : false,
+               "name" : "VIOL_COOKIE_LENGTH"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal request length",
+               "learn" : false,
+               "name" : "VIOL_REQUEST_LENGTH"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal query string length",
+               "learn" : false,
+               "name" : "VIOL_QUERY_STRING_LENGTH"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Access from disallowed Geolocation",
+               "learn" : true,
+               "name" : "VIOL_GEOLOCATION"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "HTTP protocol compliance failed",
+               "learn" : true,
+               "name" : "VIOL_HTTP_PROTOCOL"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Failed to convert character",
+               "name" : "VIOL_ENCODING"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "CSRF attack detected",
+               "name" : "VIOL_CSRF"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Malformed XML data",
+               "learn" : true,
+               "name" : "VIOL_XML_MALFORMED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "XML data does not comply with schema or WSDL document",
+               "learn" : false,
+               "name" : "VIOL_XML_SCHEMA"
+            },
+            {
+               "alarm" : true,
+               "block" : false,
+               "description" : "XML data does not comply with format settings",
+               "learn" : false,
+               "name" : "VIOL_XML_FORMAT"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Web Services Security failure",
+               "learn" : false,
+               "name" : "VIOL_XML_WEB_SERVICES_SECURITY"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Evasion technique detected",
+               "learn" : true,
+               "name" : "VIOL_EVASION"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Virus detected",
+               "learn" : false,
+               "name" : "VIOL_VIRUS"
+            },
+            {
+               "alarm" : true,
+               "block" : true,
+               "description" : "Request length exceeds defined buffer size",
+               "learn" : false,
+               "name" : "VIOL_REQUEST_MAX_LENGTH"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Login URL bypassed",
+               "learn" : false,
+               "name" : "VIOL_LOGIN_URL_BYPASSED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Login URL expired",
+               "learn" : false,
+               "name" : "VIOL_LOGIN_URL_EXPIRED"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Data Guard: Information leakage detected",
+               "learn" : false,
+               "name" : "VIOL_DATA_GUARD"
+            },
+            {
+               "alarm" : false,
+               "block" : false,
+               "description" : "Illegal attachment in SOAP message",
+               "learn" : false,
+               "name" : "VIOL_XML_SOAP_ATTACHMENT"
+            }
+         ],
+         "web-services-securities" : [
+            {
+               "description" : "UnSigned Timestamp",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Timestamp expiration is too far in the future",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Expired Timestamp",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Invalid Timestamp",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Missing Timestamp",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Verification Error",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Signing Error",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Encryption Error",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Decryption Error",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Certificate Error",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Certificate Expired",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Malformed Error",
+               "enabled" : false,
+               "learn" : false
+            },
+            {
+               "description" : "Internal Error",
+               "enabled" : false,
+               "learn" : false
+            }
+         ]
+      },
+      "brute-force-attack-preventions" : [
+         {
+            "bruteForceProtectionForAllLoginPages" : false,
+            "captchaBypassCriteria" : {
+               "action" : "alarm-and-drop",
+               "enabled" : true,
+               "threshold" : 5
+            },
+            "clientSideIntegrityBypassCriteria" : {
+               "action" : "alarm-and-captcha",
+               "enabled" : true,
+               "threshold" : 3
+            },
+            "detectionCriteria" : {
+               "action" : "alarm-and-captcha",
+               "credentialsStuffingMatchesReached" : 100,
+               "detectCredentialsStuffingAttack" : true,
+               "detectDistributedBruteForceAttack" : true,
+               "failedLoginAttemptsRateReached" : 100
+            },
+            "leakedCredentialsCriteria" : {
+               "action" : "alarm-and-blocking-page",
+               "enabled" : false
+            },
+            "loginAttemptsFromTheSameDeviceId" : {
+               "action" : "alarm-and-captcha",
+               "enabled" : false,
+               "threshold" : 3
+            },
+            "loginAttemptsFromTheSameIp" : {
+               "action" : "alarm-and-captcha",
+               "enabled" : true,
+               "threshold" : 20
+            },
+            "loginAttemptsFromTheSameUser" : {
+               "action" : "alarm-and-captcha",
+               "enabled" : true,
+               "threshold" : 3
+            },
+            "measurementPeriod" : 900,
+            "preventionDuration" : "3600",
+            "reEnableLoginAfter" : 3600,
+            "sourceBasedProtectionDetectionPeriod" : 3600
+         }
+      ],
+      "caseInsensitive" : true,
+      "cookie-settings" : {
+         "maximumCookieHeaderLength" : "any"
+      },
+      "cookies" : [
+         {
+            "accessibleOnlyThroughTheHttpProtocol" : false,
+            "attackSignaturesCheck" : true,
+            "enforcementType" : "allow",
+            "insertSameSiteAttribute" : "none",
+            "isBase64" : false,
+            "maskValueInLogs" : false,
+            "name" : "*",
+            "performStaging" : false,
+            "securedOverHttpsConnection" : false,
+            "type" : "wildcard",
+            "wildcardOrder" : 1
+         }
+      ],
+      "csrf-protection" : {
+         "enabled" : false
+      },
+      "csrf-urls" : [
+         {
+            "enforcementAction" : "verify-origin",
+            "method" : "POST",
+            "requiredParameters" : "ignore",
+            "url" : "*",
+            "wildcardOrder" : 1
+         }
+      ],
+      "data-guard" : {
+         "enabled" : false,
+         "enforcementMode" : "ignore-urls-in-list"
+      },
+      "database-protection" : {
+         "databaseProtectionEnabled" : false,
+         "userSource" : "apm"
+      },
+      "deception-settings" : {
+         "enableCustomResponses" : false,
+         "enableResponsePageByAttackType" : true,
+         "serverTechnologyName" : "Nginx"
+      },
+      "description" : "Baseline Policy",
+      "enablePassiveMode" : false,
+      "enforcementMode" : "blocking",
+      "filetypes" : [
+         {
+            "allowed" : false,
+            "name" : "wmz"
+         },
+         {
+            "allowed" : false,
+            "name" : "tmp"
+         },
+         {
+            "allowed" : false,
+            "name" : "temp"
+         },
+         {
+            "allowed" : false,
+            "name" : "sys"
+         },
+         {
+            "allowed" : false,
+            "name" : "stm"
+         },
+         {
+            "allowed" : false,
+            "name" : "shtml"
+         },
+         {
+            "allowed" : false,
+            "name" : "shtm"
+         },
+         {
+            "allowed" : false,
+            "name" : "save"
+         },
+         {
+            "allowed" : false,
+            "name" : "sav"
+         },
+         {
+            "allowed" : false,
+            "name" : "reg"
+         },
+         {
+            "allowed" : false,
+            "name" : "printer"
+         },
+         {
+            "allowed" : false,
+            "name" : "pol"
+         },
+         {
+            "allowed" : false,
+            "name" : "pfx"
+         },
+         {
+            "allowed" : false,
+            "name" : "pem"
+         },
+         {
+            "allowed" : false,
+            "name" : "p7c"
+         },
+         {
+            "allowed" : false,
+            "name" : "p7b"
+         },
+         {
+            "allowed" : false,
+            "name" : "p12"
+         },
+         {
+            "allowed" : false,
+            "name" : "old"
+         },
+         {
+            "allowed" : false,
+            "name" : "nws"
+         },
+         {
+            "allowed" : false,
+            "name" : "msi"
+         },
+         {
+            "allowed" : false,
+            "name" : "log"
+         },
+         {
+            "allowed" : false,
+            "name" : "key"
+         },
+         {
+            "allowed" : false,
+            "name" : "ini"
+         },
+         {
+            "allowed" : false,
+            "name" : "idq"
+         },
+         {
+            "allowed" : false,
+            "name" : "idc"
+         },
+         {
+            "allowed" : false,
+            "name" : "ida"
+         },
+         {
+            "allowed" : false,
+            "name" : "htw"
+         },
+         {
+            "allowed" : false,
+            "name" : "htr"
+         },
+         {
+            "allowed" : false,
+            "name" : "hta"
+         },
+         {
+            "allowed" : false,
+            "name" : "exe"
+         },
+         {
+            "allowed" : false,
+            "name" : "eml"
+         },
+         {
+            "allowed" : false,
+            "name" : "dll"
+         },
+         {
+            "allowed" : false,
+            "name" : "der"
+         },
+         {
+            "allowed" : false,
+            "name" : "dat"
+         },
+         {
+            "allowed" : false,
+            "name" : "crt"
+         },
+         {
+            "allowed" : false,
+            "name" : "config"
+         },
+         {
+            "allowed" : false,
+            "name" : "conf"
+         },
+         {
+            "allowed" : false,
+            "name" : "com"
+         },
+         {
+            "allowed" : false,
+            "name" : "cmd"
+         },
+         {
+            "allowed" : false,
+            "name" : "cgi"
+         },
+         {
+            "allowed" : false,
+            "name" : "cfg"
+         },
+         {
+            "allowed" : false,
+            "name" : "cer"
+         },
+         {
+            "allowed" : false,
+            "name" : "bkp"
+         },
+         {
+            "allowed" : false,
+            "name" : "bin"
+         },
+         {
+            "allowed" : false,
+            "name" : "bck"
+         },
+         {
+            "allowed" : false,
+            "name" : "bat"
+         },
+         {
+            "allowed" : false,
+            "name" : "bak"
+         },
+         {
+            "allowed" : true,
+            "checkPostDataLength" : false,
+            "checkQueryStringLength" : false,
+            "checkRequestLength" : false,
+            "checkUrlLength" : false,
+            "name" : "*",
+            "performStaging" : false,
+            "responseCheck" : false,
+            "type" : "wildcard",
+            "wildcardOrder" : 1
+         }
+      ],
+      "fullPath" : "/Common/baseline",
+      "general" : {
+         "allowedResponseCodes" : [
+            400,
+            401,
+            403,
+            404,
+            405,
+            429,
+            501,
+            502,
+            503,
+            504
+         ],
+         "enableEventCorrelation" : false,
+         "enforcementReadinessPeriod" : 7,
+         "maskCreditCardNumbersInRequest" : false,
+         "pathParameterHandling" : "as-parameters",
+         "triggerAsmIruleEvent" : "disabled",
+         "trustXff" : false,
+         "useDynamicSessionIdInUrl" : false
+      },
+      "graphql-profiles" : [
+         {
+            "attackSignaturesCheck" : true,
+            "defenseAttributes" : {
+               "allowIntrospectionQueries" : false,
+               "maximumBatchedQueries" : "any",
+               "maximumStructureDepth" : "any",
+               "maximumTotalLength" : "any",
+               "maximumValueLength" : "any",
+               "tolerateParsingWarnings" : true
+            },
+            "description" : "Default GraphQL Profile",
+            "metacharElementCheck" : true,
+            "name" : "Default"
+         }
+      ],
+      "gwt-profiles" : [
+         {
+            "attackSignaturesCheck" : true,
+            "defenseAttributes" : {
+               "maximumTotalLengthOfGWTData" : "any",
+               "maximumValueLength" : "any",
+               "tolerateGWTParsingWarnings" : true
+            },
+            "description" : "Default GWT Profile",
+            "metacharElementCheck" : false,
+            "name" : "Default"
+         }
+      ],
+      "header-settings" : {
+         "maximumHttpHeaderLength" : "any"
+      },
+      "headers" : [
+         {
+            "allowRepeatedOccurrences" : false,
+            "base64Decoding" : false,
+            "checkSignatures" : true,
+            "htmlNormalization" : false,
+            "mandatory" : false,
+            "maskValueInLogs" : false,
+            "name" : "transfer-encoding",
+            "normalizationViolations" : false,
+            "percentDecoding" : false,
+            "type" : "explicit",
+            "urlNormalization" : false
+         },
+         {
+            "allowRepeatedOccurrences" : true,
+            "base64Decoding" : false,
+            "checkSignatures" : true,
+            "htmlNormalization" : false,
+            "mandatory" : false,
+            "maskValueInLogs" : false,
+            "name" : "referer",
+            "normalizationViolations" : true,
+            "percentDecoding" : false,
+            "type" : "explicit",
+            "urlNormalization" : true
+         },
+         {
+            "allowRepeatedOccurrences" : true,
+            "checkSignatures" : false,
+            "mandatory" : false,
+            "maskValueInLogs" : false,
+            "name" : "cookie",
+            "type" : "explicit"
+         },
+         {
+            "allowRepeatedOccurrences" : true,
+            "base64Decoding" : false,
+            "checkSignatures" : true,
+            "htmlNormalization" : false,
+            "mandatory" : false,
+            "maskValueInLogs" : true,
+            "name" : "authorization",
+            "normalizationViolations" : false,
+            "percentDecoding" : true,
+            "type" : "explicit",
+            "urlNormalization" : false
+         },
+         {
+            "allowRepeatedOccurrences" : true,
+            "base64Decoding" : false,
+            "checkSignatures" : true,
+            "htmlNormalization" : false,
+            "mandatory" : false,
+            "maskValueInLogs" : false,
+            "name" : "*",
+            "normalizationViolations" : false,
+            "percentDecoding" : true,
+            "type" : "wildcard",
+            "urlNormalization" : false,
+            "wildcardOrder" : 1
+         }
+      ],
+      "ip-intelligence" : {
+         "enabled" : false
+      },
+      "json-profiles" : [
+         {
+            "attackSignaturesCheck" : true,
+            "defenseAttributes" : {
+               "maximumArrayLength" : "any",
+               "maximumStructureDepth" : 25,
+               "maximumTotalLengthOfJSONData" : "any",
+               "maximumValueLength" : "any",
+               "tolerateJSONParsingWarnings" : true
+            },
+            "description" : "Default JSON Profile",
+            "handleJsonValuesAsParameters" : false,
+            "hasValidationFiles" : false,
+            "metacharElementCheck" : true,
+            "name" : "Default",
+            "validationFiles" : []
+         }
+      ],
+      "login-enforcement" : {
+         "expirationTimePeriod" : "disabled"
+      },
+      "methods" : [
+         {
+            "actAsMethod" : "GET",
+            "name" : "DELETE"
+         },
+         {
+            "actAsMethod" : "GET",
+            "name" : "PUT"
+         },
+         {
+            "actAsMethod" : "POST",
+            "name" : "PATCH"
+         },
+         {
+            "actAsMethod" : "POST",
+            "name" : "POST"
+         },
+         {
+            "actAsMethod" : "GET",
+            "name" : "OPTIONS"
+         },
+         {
+            "actAsMethod" : "GET",
+            "name" : "GET"
+         },
+         {
+            "actAsMethod" : "GET",
+            "name" : "HEAD"
+         }
+      ],
+      "name" : "baseline",
+      "parameters" : [
+         {
+            "allowEmptyValue" : true,
+            "allowRepeatedParameterName" : true,
+            "attackSignaturesCheck" : true,
+            "checkMaxValueLength" : false,
+            "checkMetachars" : true,
+            "isBase64" : false,
+            "isCookie" : false,
+            "isHeader" : false,
+            "level" : "global",
+            "metacharsOnParameterValueCheck" : true,
+            "name" : "*",
+            "parameterLocation" : "any",
+            "performStaging" : false,
+            "sensitiveParameter" : false,
+            "type" : "wildcard",
+            "valueType" : "auto-detect",
+            "wildcardOrder" : 1
+         }
+      ],
+      "plain-text-profiles" : [
+         {
+            "attackSignaturesCheck" : true,
+            "defenseAttributes" : {
+               "maximumLineLength" : "any",
+               "maximumTotalLength" : "any",
+               "performPercentDecoding" : false
+            },
+            "description" : "Default Plain Text Profile",
+            "metacharElementCheck" : false,
+            "name" : "Default"
+         }
+      ],
+      "policy-builder" : {
+         "learningMode" : "disabled"
+      },
+      "policy-builder-central-configuration" : {
+         "buildingMode" : "local",
+         "eventCorrelationMode" : "local"
+      },
+      "policy-builder-cookie" : {
+         "collapseCookiesIntoOneEntity" : false,
+         "enforceUnmodifiedCookies" : false,
+         "learnExplicitCookies" : "never",
+         "maximumCookies" : 100
+      },
+      "policy-builder-filetype" : {
+         "learnExplicitFiletypes" : "never",
+         "maximumFileTypes" : 100
+      },
+      "policy-builder-header" : {
+         "maximumHosts" : 10000,
+         "validHostNames" : false
+      },
+      "policy-builder-parameter" : {
+         "classifyParameters" : false,
+         "collapseParametersIntoOneEntity" : false,
+         "dynamicParameters" : {
+            "allHiddenFields" : false,
+            "formParameters" : false,
+            "linkParameters" : false,
+            "uniqueValueSets" : 10
+         },
+         "learnExplicitParameters" : "never",
+         "maximumParameters" : 10000,
+         "parameterLearningLevel" : "global",
+         "parametersIntegerValue" : false
+      },
+      "policy-builder-redirection-protection" : {
+         "learnExplicitRedirectionDomains" : "never",
+         "maximumRedirectionDomains" : 100
+      },
+      "policy-builder-server-technologies" : {
+         "enableServerTechnologiesDetection" : false
+      },
+      "policy-builder-sessions-and-logins" : {
+         "learnLoginPage" : false
+      },
+      "policy-builder-url" : {
+         "classifyUrls" : false,
+         "classifyWebsocketUrls" : false,
+         "collapseUrlsIntoOneEntity" : false,
+         "learnExplicitUrls" : "never",
+         "learnExplicitWebsocketUrls" : "never",
+         "learnMethodsOnUrls" : false,
+         "maximumUrls" : 10000,
+         "maximumWebsocketUrls" : 100,
+         "wildcardUrlFiletypes" : [
+            "pdf",
+            "ico",
+            "wav",
+            "png",
+            "bmp",
+            "jpg",
+            "gif",
+            "swf",
+            "pcx",
+            "jpeg"
+         ]
+      },
+      "protocolIndependent" : true,
+      "redirection-protection" : {
+         "redirectionProtectionEnabled" : false
+      },
+      "response-pages" : [
+         {
+            "responseActionType" : "default",
+            "responsePageType" : "graphql"
+         },
+         {
+            "responseActionType" : "default",
+            "responsePageType" : "persistent-flow"
+         },
+         {
+            "ajaxActionType" : "alert-popup",
+            "ajaxPopupMessage" : "These username and password were found in the Leaked Credentials Data Base. They maybe used by attackers to compromise your account. Please change password.",
+            "responsePageType" : "leaked-credentials-ajax"
+         },
+         {
+            "responseActionType" : "default",
+            "responsePageType" : "leaked-credentials"
+         },
+         {
+            "ajaxActionType" : "alert-popup",
+            "ajaxPopupMessage" : "Login Failed. Username or password is incorrect. Please try to log in again.",
+            "responsePageType" : "failed-login-honeypot-ajax"
+         },
+         {
+            "responseActionType" : "default",
+            "responsePageType" : "failed-login-honeypot"
+         },
+         {
+            "responseActionType" : "default",
+            "responsePageType" : "captcha-fail"
+         },
+         {
+            "responseActionType" : "default",
+            "responsePageType" : "captcha"
+         },
+         {
+            "responseActionType" : "default",
+            "responsePageType" : "mobile"
+         },
+         {
+            "responseActionType" : "erase-cookies",
+            "responsePageType" : "hijack"
+         },
+         {
+            "ajaxActionType" : "alert-popup",
+            "ajaxPopupMessage" : "The requested URL was rejected. Please consult with your administrator. Your support ID is: <%TS.request.ID()%>",
+            "responsePageType" : "ajax-login"
+         },
+         {
+            "ajaxActionType" : "alert-popup",
+            "ajaxEnabled" : false,
+            "ajaxPopupMessage" : "The requested URL was rejected. Please consult with your administrator. Your support ID is: <%TS.request.ID()%>",
+            "responsePageType" : "ajax"
+         },
+         {
+            "responseActionType" : "soap-fault",
+            "responsePageType" : "xml"
+         },
+         {
+            "responseActionType" : "default",
+            "responsePageType" : "default"
+         }
+      ],
+      "sensitive-parameters" : [
+         {
+            "name" : "password"
+         }
+      ],
+      "session-tracking" : {
+         "delayBlocking" : {},
+         "sessionTrackingConfiguration" : {
+            "enableSessionAwareness" : false,
+            "enableTrackingSessionHijackingByDeviceId" : false
+         }
+      },
+      "signature-sets" : [
+         {
+            "alarm" : true,
+            "block" : true,
+            "learn" : true,
+            "name" : "High Accuracy Signatures"
+         },
+         {
+            "alarm" : true,
+            "block" : false,
+            "learn" : true,
+            "name" : "Medium Accuracy Signatures"
+         }
+      ],
+      "signature-settings" : {
+         "attackSignatureFalsePositiveMode" : "detect-and-allow",
+         "minimumAccuracyForAutoAddedSignatures" : "medium",
+         "placeSignaturesInStaging" : false,
+         "signatureStaging" : false
+      },
+      "softwareVersion" : "16.1.0",
+      "template" : {
+         "name" : "POLICY_TEMPLATE_MINIMAL_SECURITY"
+      },
+      "threat-campaign-settings" : {
+         "threatCampaignEnforcementReadinessPeriod" : 1,
+         "threatCampaignStaging" : false
+      },
+      "type" : "security",
+      "urls" : [
+         {
+            "attackSignaturesCheck" : true,
+            "clickjackingProtection" : false,
+            "description" : "",
+            "disallowFileUploadOfExecutables" : true,
+            "html5CrossOriginRequestsEnforcement" : {
+               "enforcementMode" : "disabled"
+            },
+            "isAllowed" : true,
+            "mandatoryBody" : false,
+            "metacharsOnUrlCheck" : false,
+            "method" : "*",
+            "methodsOverrideOnUrlCheck" : false,
+            "name" : "*",
+            "performStaging" : false,
+            "protocol" : "http",
+            "type" : "wildcard",
+            "urlContentProfiles" : [
+               {
+                  "headerName" : "*",
+                  "headerOrder" : "default",
+                  "headerValue" : "*",
+                  "type" : "apply-value-and-content-signatures"
+               },
+               {
+                  "headerName" : "Content-Type",
+                  "headerOrder" : "1",
+                  "headerValue" : "*form*",
+                  "type" : "form-data"
+               },
+               {
+                  "contentProfile" : {
+                     "name" : "Default"
+                  },
+                  "headerName" : "Content-Type",
+                  "headerOrder" : "2",
+                  "headerValue" : "*json*",
+                  "type" : "json"
+               },
+               {
+                  "contentProfile" : {
+                     "name" : "Default"
+                  },
+                  "headerName" : "Content-Type",
+                  "headerOrder" : "3",
+                  "headerValue" : "*xml*",
+                  "type" : "xml"
+               }
+            ],
+            "wildcardIncludesSlash" : true,
+            "wildcardOrder" : 2
+         }
+      ],
+      "websocket-urls" : [
+         {
+            "checkMessageFrameMaxCount" : false,
+            "checkMessageFrameMaxSize" : false,
+            "checkPayload" : false,
+            "description" : "",
+            "html5CrossOriginRequestsEnforcement" : {
+               "enforcementMode" : "disabled"
+            },
+            "isAllowed" : true,
+            "metacharsOnWebsocketUrlCheck" : false,
+            "name" : "*",
+            "performStaging" : false,
+            "protocol" : "ws",
+            "type" : "wildcard",
+            "unsupportedExtensions" : "remove",
+            "wildcardIncludesSlash" : true,
+            "wildcardOrder" : 2
+         }
+      ],
+      "xml-profiles" : [
+         {
+            "attachmentsInSoapMessages" : false,
+            "attackSignaturesCheck" : true,
+            "defenseAttributes" : {
+               "allowCDATA" : true,
+               "allowDTDs" : true,
+               "allowExternalReferences" : true,
+               "allowProcessingInstructions" : true,
+               "maximumAttributeValueLength" : "any",
+               "maximumAttributesPerElement" : 32,
+               "maximumChildrenPerElement" : 4096,
+               "maximumDocumentDepth" : 32,
+               "maximumDocumentSize" : 1024000,
+               "maximumElements" : 512000,
+               "maximumNSDeclarations" : 64,
+               "maximumNameLength" : "any",
+               "maximumNamespaceLength" : "any",
+               "tolerateCloseTagShorthand" : true,
+               "tolerateLeadingWhiteSpace" : true,
+               "tolerateNumericNames" : true
+            },
+            "description" : "Default XML Profile",
+            "enableWss" : false,
+            "followSchemaLinks" : false,
+            "inspectSoapAttachments" : false,
+            "metacharAttributeCheck" : false,
+            "metacharElementCheck" : false,
+            "name" : "Default",
+            "useXmlResponsePage" : false,
+            "validationFiles" : [],
+            "validationSoapActionHeader" : false
+         }
+      ]
+   }
+}
