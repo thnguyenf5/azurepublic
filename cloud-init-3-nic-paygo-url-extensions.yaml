@@ -93,7 +93,7 @@ extension_services:
                 - serverAddresses:
                     - 172.25.101.4
                     - 172.25.101.5
-                  servicePort: 80
+                  servicePort: 3000
               monitors:
                 - http
             Custom_HTTP_Profile:
