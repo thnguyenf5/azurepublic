@@ -72,7 +72,7 @@ extension_services:
   service_operations:
     - extensionType: do
       type: url
-      value: https://cdn.f5.com/product/cloudsolutions/declarations/template2-0/autoscale-waf/autoscale_do_payg.json
+      value: https://github.com/thnguyenf5/azurepublic/blob/main/do_w_admin.json
       verifyTls: false
     - extensionType: as3
       type: inline
