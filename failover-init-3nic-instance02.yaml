@@ -23,16 +23,16 @@ runtime_parameters:
       secretId: '{{{SECRET_ID}}}'
   - name: AS3_VIP01
     type: static
-    value: 172.25.1.101
+    value: '172.25.1.101'
   - name: AS3_poolmem01
     type: static
-    value: 172.25.101.4
+    value: '172.25.101.4'
   - name: AS3_poolmem02
     type: static
-    value: 172.25.101.5
+    value: '172.25.101.5'
   - name: AS3_poolport
     type: static
-    value: 3000
+    value: '3000'
   - name: cfe_label
     type: static
     value: thnguyen-cfe
