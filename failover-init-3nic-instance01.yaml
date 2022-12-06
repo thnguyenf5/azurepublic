@@ -8,13 +8,19 @@ pre_onboard_enabled:
       - /usr/bin/setdb provision.extramb 1000
       - /usr/bin/setdb restjavad.useextramb true
 runtime_parameters:
+  - name: VAULT_URL
+    type: url
+    value: 'https://keyvault-thnguyen.vault.azure.net/'
+  - name: SECRET_ID
+    type: url
+    value: 'https://keyvault-thnguyen.vault.azure.net/bigip-pass'
   - name: BIGIP_PASSWORD
     type: secret
     secretProvider:
       type: KeyVault
       environment: azure
-      vaultUrl: https://keyvault-thnguyen.vault.azure.net/
-      secretId: bigip-pass
+      vaultUrl: '{{{VAULT_URL}}}'
+      secretId: '{{{SECRET_ID}}}'
   - name: AS3_VIP01
     type: static
     value: 172.25.1.101
