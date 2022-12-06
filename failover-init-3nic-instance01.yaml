@@ -219,7 +219,7 @@ extension_services:
             Custom_WAF_Policy:
               class: WAF_Policy
               url: >-
-                https://github.com/thnguyenf5/azurepublic/blob/main/devcentral-waf-baseline.json
+                https://raw.githubusercontent.com/thnguyenf5/azurepublic/main/devcentral-waf-baseline.json
               enforcementMode: blocking
               ignoreChanges: false
             Service_Address_01:
