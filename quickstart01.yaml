@@ -108,6 +108,7 @@ extension_services:
             class: Provision
             ltm: nominal
             asm: nominal
+            avr: nominal
           My_System:
             class: System
             autoPhonehome: true
@@ -176,8 +177,9 @@ extension_services:
               remark: Service 1 shared pool
               members:
                 - serverAddresses:
-                    - 10.0.3.4
-                  servicePort: 80
+                    - 172.25.101.4
+                    - 172.25.101.5
+                  servicePort: 3000
               monitors:
                 - http
             Custom_HTTP_Profile:
@@ -186,12 +188,12 @@ extension_services:
             Custom_WAF_Policy:
               class: WAF_Policy
               url: >-
-                https://raw.githubusercontent.com/F5Networks/f5-azure-arm-templates-v2/v2.6.0.0/examples/quickstart/bigip-configurations/Rapid_Deployment_Policy_13_1.xml
+                https://raw.githubusercontent.com/thnguyenf5/azurepublic/main/devcentral-waf-baseline.json
               enforcementMode: blocking
               ignoreChanges: false
             Service_Address_01:
               class: Service_Address
-              virtualAddress: 10.0.1.101
+              virtualAddress: 172.25.1.101
           HTTP_Service:
             class: Application
             template: http
