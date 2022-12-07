@@ -2,7 +2,7 @@ controls:
   logLevel: info
   logFilename: /var/log/cloud/bigIpRuntimeInit.log
   logToJson: true
-  extensionInstallDelayInMs: 300000
+  extensionInstallDelayInMs: 150000
 extension_packages:
   install_operations:
     - extensionType: do
@@ -122,11 +122,11 @@ extension_services:
           logLevel: silly
         externalStorage:
           scopingTags:
-            f5_cloud_failover_label: bigip_high_availability_solution
+            f5_cloud_failover_label: thnguyen-cfe
         failoverAddresses:
           enabled: true
           scopingTags:
-            f5_cloud_failover_label: bigip_high_availability_solution
+            f5_cloud_failover_label: thnguyen-cfe
           requireScopingTags: false
     - extensionType: do
       type: inline
