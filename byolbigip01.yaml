@@ -2,7 +2,6 @@ controls:
   logLevel: info
   logFilename: /var/log/cloud/bigIpRuntimeInit.log
   logToJson: true
-  extensionInstallDelayInMs: 150000
 extension_packages:
   install_operations:
     - extensionType: do
@@ -18,6 +17,23 @@ extension_packages:
       extensionVersion: 1.31.0
 extension_services:
   service_operations:
+    - extensionType: cf
+      type: inline
+      value:
+        schemaVersion: 1.0.0
+        class: Cloud_Failover
+        environment: azure
+        controls:
+          class: Controls
+          logLevel: silly
+        externalStorage:
+          scopingTags:
+            f5_cloud_failover_label: thnguyen-cfe
+        failoverAddresses:
+          enabled: true
+          scopingTags:
+            f5_cloud_failover_label: thnguyen-cfe
+          requireScopingTags: false
     - extensionType: do
       type: inline
       value:
@@ -115,116 +131,6 @@ extension_services:
             vlan: internal
             allowService: none
             trafficGroup: traffic-group-local-only
-    - extensionType: cf
-      type: inline
-      value:
-        schemaVersion: 1.0.0
-        class: Cloud_Failover
-        environment: azure
-        controls:
-          class: Controls
-          logLevel: silly
-        externalStorage:
-          scopingTags:
-            f5_cloud_failover_label: thnguyen-cfe
-        failoverAddresses:
-          enabled: true
-          scopingTags:
-            f5_cloud_failover_label: thnguyen-cfe
-          requireScopingTags: false
-    - extensionType: do
-      type: inline
-      value:
-        schemaVersion: 1.0.0
-        class: Device
-        async: true
-        label: Standalone 3NIC BIG-IP declaration for Declarative Onboarding with
-          BYOL license
-        Common:
-          class: Tenant
-          My_DbVariables:
-            class: DbVariables
-            provision.extramb: 1000
-            restjavad.useextramb: true
-            dhclient.mgmt: disable
-            config.allow.rfc3927: enable
-            tm.tcpudptxchecksum: Software-only
-          My_Provisioning:
-            class: Provision
-            asm: nominal
-            avr: nominal
-            ltm: nominal
-          My_Ntp:
-            class: NTP
-            servers:
-              - 0.pool.ntp.org
-              - 1.pool.ntp.org
-            timezone: UTC
-          My_Dns:
-            class: DNS
-            nameServers:
-              - 168.63.129.16
-          My_System:
-            autoPhonehome: true
-            class: System
-            hostname: '{{{HOST_NAME}}}'
-          admin:
-            class: User
-            userType: regular
-            password: '{{{BIGIP_PASSWORD}}}'
-            shell: bash
-          default:
-            class: ManagementRoute
-            gw: '{{{MGMT_GW}}}'
-            network: default
-          dhclient_route1:
-            class: ManagementRoute
-            gw: '{{{MGMT_GW}}}'
-            network: 168.63.129.16/32
-          azureMetadata:
-            class: ManagementRoute
-            gw: '{{{MGMT_GW}}}'
-            network: 169.254.169.254/32
-          defaultRoute:
-            class: Route
-            gw: '{{{DEFAULT_GW}}}'
-            network: default
-            mtu: 1500
-          external:
-            class: VLAN
-            tag: 4094
-            mtu: 1500
-            interfaces:
-              - name: '1.1'
-                tagged: false
-          external-self:
-            class: SelfIp
-            address: '{{{SELF_IP_EXTERNAL}}}'
-            vlan: external
-            allowService:
-              - tcp:443
-              - udp:1026
-              - tcp:4353
-              - tcp:6123
-              - tcp:6124
-              - tcp:6125
-              - tcp:6126
-              - tcp:6127
-              - tcp:6128
-            trafficGroup: traffic-group-local-only
-          internal:
-            class: VLAN
-            interfaces:
-              - name: '1.2'
-                tagged: false
-            mtu: 1500
-            tag: 4093
-          internal-self:
-            class: SelfIp
-            address: '{{{SELF_IP_INTERNAL}}}'
-            vlan: internal
-            allowService: none
-            trafficGroup: traffic-group-local-only
           configSync:
             class: ConfigSync
             configsyncIp: /Common/external-self/address
@@ -250,6 +156,69 @@ extension_services:
             remoteHost: /Common/failoverGroup/members/0
             remoteUsername: admin
             remotePassword: '{{{BIGIP_PASSWORD}}}'
+    - extensionType: as3
+      type: inline
+      value:
+        class: ADC
+        schemaVersion: 3.0.0
+        label: Failover
+        remark: Failover
+        Tenant_1:
+          class: Tenant
+          Shared:
+            class: Application
+            template: shared
+            Shared_Pool:
+              class: Pool
+              remark: Service 1 shared pool
+              members:
+                - serverAddresses:
+                    - '{{{AS3_poolmem01}}}'
+                    - '{{{AS3_poolmem02}}}'
+                  servicePort: '{{{AS3_poolport}}}'
+              monitors:
+                - http
+            Custom_HTTP_Profile:
+              class: HTTP_Profile
+              xForwardedFor: true
+            Custom_WAF_Policy:
+              class: WAF_Policy
+              url: >-
+                https://raw.githubusercontent.com/thnguyenf5/azurepublic/main/devcentral-waf-baseline.json
+              enforcementMode: blocking
+              ignoreChanges: false
+            Service_Address_01:
+              class: Service_Address
+              virtualAddress: '{{{AS3_VIP01}}}'
+          HTTP_Service:
+            class: Application
+            template: http
+            serviceMain:
+              class: Service_HTTP
+              virtualAddresses:
+                - use: /Tenant_1/Shared/Service_Address_01
+              snat: auto
+              pool: /Tenant_1/Shared/Shared_Pool
+              profileHTTP:
+                use: /Tenant_1/Shared/Custom_HTTP_Profile
+              policyWAF:
+                use: /Tenant_1/Shared/Custom_WAF_Policy
+          HTTPS_Service:
+            class: Application
+            template: https
+            serviceMain:
+              class: Service_HTTPS
+              virtualAddresses:
+                - use: /Tenant_1/Shared/Service_Address_01
+              snat: auto
+              pool: /Tenant_1/Shared/Shared_Pool
+              profileHTTP:
+                use: /Tenant_1/Shared/Custom_HTTP_Profile
+              policyWAF:
+                use: /Tenant_1/Shared/Custom_WAF_Policy
+              serverTLS:
+                bigip: /Common/clientssl
+              redirect80: false
 post_onboard_enabled: []
 pre_onboard_enabled:
   - name: provision_rest
@@ -314,3 +283,15 @@ runtime_parameters:
     tagProvider:
       environment: azure
       key: bigIpPeerHostname
+  - name: AS3_VIP01
+    type: static
+    value: '172.25.1.101'
+  - name: AS3_poolmem01
+    type: static
+    value: '172.25.101.4'
+  - name: AS3_poolmem02
+    type: static
+    value: '172.25.101.5'
+  - name: AS3_poolport
+    type: static
+    value: '3000'
