@@ -1,6 +1,8 @@
 controls:
   logLevel: info
   logFilename: /var/log/cloud/bigIpRuntimeInit.log
+  logToJson: true
+  extensionInstallDelayInMs: 300000
 extension_packages:
   install_operations:
     - extensionType: do
@@ -23,7 +25,7 @@ extension_services:
         class: Device
         async: true
         label: Standalone 3NIC BIG-IP declaration for Declarative Onboarding with
-          BYOL license
+          PAYG license
         Common:
           class: Tenant
           My_DbVariables:
@@ -52,10 +54,6 @@ extension_services:
             autoPhonehome: true
             class: System
             hostname: '{{{HOST_NAME}}}'
-          My_License:
-            class: License
-            licenseType: regKey
-            regKey: '{{{LICENSE_KEY}}}'
           admin:
             class: User
             userType: regular
@@ -137,7 +135,7 @@ extension_services:
         class: Device
         async: true
         label: Standalone 3NIC BIG-IP declaration for Declarative Onboarding with
-          BYOL license
+          PAYG license
         Common:
           class: Tenant
           My_DbVariables:
@@ -262,9 +260,6 @@ runtime_parameters:
   - name: SECRET_ID
     type: url
     value: file:///config/cloud/secret_id
-  - name: LICENSE_KEY
-    type: url
-    value: 'https://keyvault-thnguyen.vault.azure.net/secrets/bigip02-byol'
   - name: BIGIP_PASSWORD
     type: secret
     secretProvider:

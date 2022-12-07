@@ -1,6 +1,8 @@
 controls:
   logLevel: info
   logFilename: /var/log/cloud/bigIpRuntimeInit.log
+  logToJson: true
+  extensionInstallDelayInMs: 300000
 extension_packages:
   install_operations:
     - extensionType: do
@@ -264,7 +266,7 @@ runtime_parameters:
     value: file:///config/cloud/secret_id
   - name: LICENSE_KEY
     type: url
-    value: 'https://keyvault-thnguyen.vault.azure.net/secrets/bigip01-byol'
+    value: file:///config/cloud/license_key
   - name: BIGIP_PASSWORD
     type: secret
     secretProvider:
