@@ -1,7 +1,6 @@
 controls:
   logLevel: info
   logFilename: /var/log/cloud/bigIpRuntimeInit.log
-  logToJson: true
 extension_packages:
   install_operations:
     - extensionType: do
@@ -14,9 +13,10 @@ extension_packages:
       extensionVersion: 1.13.0
       extensionHash: 93be496d250838697d8a9aca8bd0e6fe7480549ecd43280279f0a63fc741ab50
     - extensionType: ts
-      extensionVersion: 1.31.0
+      extensionVersion: 1.32.0
+      extensionHash: a6bf242728a5ba1b8b8f26b59897765567db7e0f0267ba9973f822be3ab387b6
 extension_services:
-  service_operations: 
+  service_operations:
     - extensionType: do
       type: inline
       value:
@@ -38,6 +38,7 @@ extension_services:
             class: Provision
             asm: nominal
             ltm: nominal
+            avr: nominal
           My_Ntp:
             class: NTP
             servers:
@@ -147,9 +148,9 @@ extension_services:
               remark: Service 1 shared pool
               members:
                 - serverAddresses:
-                    - '{{{AS3_poolmem01}}}'
-                    - '{{{AS3_poolmem02}}}'
-                  servicePort: '{{{AS3_poolport}}}'
+                    - 172.25.101.4
+                    - 172.25.101.5
+                  servicePort: 3000
               monitors:
                 - http
             Custom_HTTP_Profile:
@@ -158,12 +159,12 @@ extension_services:
             Custom_WAF_Policy:
               class: WAF_Policy
               url: >-
-                https://raw.githubusercontent.com/thnguyenf5/azurepublic/main/devcentral-waf-baseline.json
+                https://raw.githubusercontent.com/F5Networks/f5-azure-arm-templates-v2/v2.6.0.0/examples/failover/bigip-configurations/Rapid_Deployment_Policy_13_1.xml
               enforcementMode: blocking
               ignoreChanges: false
             Service_Address_01:
               class: Service_Address
-              virtualAddress: '{{{AS3_VIP01}}}'
+              virtualAddress: 172.25.1.101
           HTTP_Service:
             class: Application
             template: http
@@ -213,8 +214,8 @@ extension_services:
           My_Provisioning:
             class: Provision
             asm: nominal
-            avr: nominal
             ltm: nominal
+            avr: nominal
           My_Ntp:
             class: NTP
             servers:
@@ -229,10 +230,6 @@ extension_services:
             autoPhonehome: true
             class: System
             hostname: '{{{HOST_NAME}}}'
-          My_License:
-            class: License
-            licenseType: regKey
-            regKey: '{{{LICENSE_KEY}}}'
           admin:
             class: User
             userType: regular
@@ -379,15 +376,3 @@ runtime_parameters:
     tagProvider:
       environment: azure
       key: bigIpPeerHostname
-  - name: AS3_VIP01
-    type: static
-    value: '172.25.1.101'
-  - name: AS3_poolmem01
-    type: static
-    value: '172.25.101.4'
-  - name: AS3_poolmem02
-    type: static
-    value: '172.25.101.5'
-  - name: AS3_poolport
-    type: static
-    value: '3000'
