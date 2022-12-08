@@ -24,7 +24,7 @@ extension_services:
         class: Device
         async: true
         label: Standalone 3NIC BIG-IP declaration for Declarative Onboarding with
-          BYOL license
+          PAYG license
         Common:
           class: Tenant
           My_DbVariables:
@@ -53,10 +53,6 @@ extension_services:
             autoPhonehome: true
             class: System
             hostname: '{{{HOST_NAME}}}'
-          My_License:
-            class: License
-            licenseType: regKey
-            regKey: '{{{LICENSE_KEY}}}'
           admin:
             class: User
             userType: regular
@@ -201,7 +197,7 @@ extension_services:
         class: Device
         async: true
         label: Standalone 3NIC BIG-IP declaration for Declarative Onboarding with
-          BYOL license
+          PAYG license
         Common:
           class: Tenant
           My_DbVariables:
@@ -297,8 +293,8 @@ extension_services:
             class: DeviceGroup
             type: sync-failover
             members:
-              - '{{{HOST_NAME}}}'
               - '{{{REMOTE_HOST_NAME}}}'
+              - '{{{HOST_NAME}}}'
             owner: /Common/failoverGroup/members/0
             autoSync: true
             saveOnAutoSync: false
@@ -309,7 +305,7 @@ extension_services:
             class: DeviceTrust
             localUsername: admin
             localPassword: '{{{BIGIP_PASSWORD}}}'
-            remoteHost: /Common/failoverGroup/members/0
+            remoteHost: '{{{REMOTE_HOST}}}'
             remoteUsername: admin
             remotePassword: '{{{BIGIP_PASSWORD}}}'
 post_onboard_enabled: []
@@ -326,9 +322,6 @@ runtime_parameters:
   - name: SECRET_ID
     type: url
     value: file:///config/cloud/secret_id
-  - name: LICENSE_KEY
-    type: url
-    value: file:///config/cloud/license_key
   - name: BIGIP_PASSWORD
     type: secret
     secretProvider:
@@ -376,3 +369,8 @@ runtime_parameters:
     tagProvider:
       environment: azure
       key: bigIpPeerHostname
+  - name: REMOTE_HOST
+    type: tag
+    tagProvider:
+      environment: azure
+      key: bigIpPeerAddr
